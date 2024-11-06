@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Vendor Management</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="mt-4">Cloud Vendor Management</h1>
+
+    <!-- Display success message -->
+    <div th:if="${message}" class="alert alert-success">
+        <span th:text="${message}"></span>
+    </div>
+
+    <!-- Button to add a new vendor -->
+    <a href="/vendor/new" class="btn btn-primary mt-3">Add New Vendor</a>
+
+    <!-- List of vendors -->
+    <h2 class="mt-4">Existing Vendors</h2>
+    <div th:each="vendor : ${vendors}">
+        <div class="card mt-2">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${vendor.vendorName}"></h5>
+                <p class="card-text">
+                    <strong>ID:</strong> <span th:text="${vendor.vendorId}"></span><br>
+                    <strong>Address:</strong> <span th:text="${vendor.vendorAddress}"></span><br>
+                    <strong>Phone Number:</strong> <span th:text="${vendor.vendorPhoneNumber}"></span>
+                </p>
+                <a th:href="@{/vendor/edit/{id}(id=${vendor.vendorId})}" class="btn btn-warning">Edit</a>
+                <form th:action="@{/vendor/{id}(id=${vendor.vendorId})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

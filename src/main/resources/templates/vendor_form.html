@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add/Edit Vendor</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="mt-4" th:text="${cloudVendor.vendorId == null} ? 'Add New Vendor' : 'Edit Vendor'"></h1>
+
+    <form th:action="${cloudVendor.vendorId == null} ? @{/vendor} : @{/vendor/update}" method="post" class="mt-4">
+        <div class="form-group">
+            <label for="vendorName">Vendor Name:</label>
+            <input type="text" class="form-control" id="vendorName" name="vendorName" th:value="${cloudVendor.vendorName}" required>
+        </div>
+        <div class="form-group">
+            <label for="vendorAddress">Vendor Address:</label>
+            <input type="text" class="form-control" id="vendorAddress" name="vendorAddress" th:value="${cloudVendor.vendorAddress}" required>
+        </div>
+        <div class="form-group">
+            <label for="vendorPhoneNumber">Vendor Phone Number:</label>
+            <input type="text" class="form-control" id="vendorPhoneNumber" name="vendorPhoneNumber" th:value="${cloudVendor.vendorPhoneNumber}" required>
+        </div>
+        <input type="hidden" name="vendorId" th:value="${cloudVendor.vendorId}"/>
+        <button type="submit" class="btn btn-primary">
+            <span th:text="${cloudVendor.vendorId == null} ? 'Add Vendor' : 'Update Vendor'"></span>
+        </button>
+        <a href="/vendor" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+</body>
+</html>
